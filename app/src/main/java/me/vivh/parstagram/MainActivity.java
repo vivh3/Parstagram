@@ -5,11 +5,14 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
+import com.parse.SignUpCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -21,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.etPassword) TextView passwordInput;
     @BindView(R.id.btnLogin) TextView loginBtn;
     @BindView(R.id.fakeTitle) TextView fakeTitle;
+    @BindView(R.id.btnSignUp) Button signupBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,28 @@ public class MainActivity extends AppCompatActivity {
                 login(username, password);
             }
         });
+
+         signupBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Sign up a new ParseUser
+                ParseUser user = new ParseUser();
+                user.setUsername(usernameInput.getText().toString());
+                user.setPassword(passwordInput.getText().toString());
+                user.signUpInBackground(new SignUpCallback() {
+                    @Override
+                    public void done(com.parse.ParseException e) {
+                        if (e == null) {
+                            Toast.makeText(getApplicationContext(), "Registered.", Toast.LENGTH_LONG).show();
+
+                        } else {
+                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                        }
+                    }
+                });
+            }
+        });
+
 
     }
 

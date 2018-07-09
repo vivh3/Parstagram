@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/background_gradient"
+    tools:context=".MainActivity">
+
+    <EditText
+        android:id="@+id/etUsername"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="222dp"
+        android:ems="10"
+        style="@style/LoginActivityEditTextTheme"
+        android:hint="Username"
+        android:inputType="textPersonName"
+        android:textSize="14sp" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etUsername"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        style="@style/LoginActivityEditTextTheme"
+        android:hint="Password"
+        android:inputType="textPassword"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_width="236dp"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="173dp"
+        android:background="?attr/colorControlHighlight"
+        android:text="Login"
+        android:textColor="?attr/colorButtonNormal"
+        tools:clickable="true" />
+
+    <Button
+        android:id="@+id/btnSignUp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:background="?attr/colorControlHighlight"
+        android:text="Sign Up"
+        android:textColor="?attr/colorButtonNormal"
+        tools:clickable="true" />
+
+    <ImageView
+        android:id="@+id/ic_logo"
+        android:layout_width="281dp"
+        android:layout_height="90dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="77dp"
+        app:srcCompat="@drawable/text_logo" />
+
+    <TextView
+        android:id="@+id/fakeTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/ic_logo"
+        android:layout_centerHorizontal="true"
+        android:fontFamily="cursive"
+        android:text="The Fake Version"
+        android:textColor="@color/white"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+</RelativeLayout>

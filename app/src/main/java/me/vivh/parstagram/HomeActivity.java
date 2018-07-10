@@ -26,7 +26,6 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.etDescription) TextView descriptionInput;
     @BindView(R.id.btnCreate) Button createButton;
     @BindView(R.id.btnRefresh) Button refreshButton;
-    @BindView(R.id.btnSignUp) Button signupButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

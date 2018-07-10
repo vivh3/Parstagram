@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
     // Automatically finds each field by the specified ID.
     @BindView(R.id.etUsername) TextView usernameInput;
     @BindView(R.id.etPassword) TextView passwordInput;
+    @BindView(R.id.etEmail) TextView emailInput;
     @BindView(R.id.btnLogin) TextView loginBtn;
     @BindView(R.id.fakeTitle) TextView fakeTitle;
     @BindView(R.id.btnSignUp) Button signupBtn;
@@ -49,6 +50,9 @@ public class MainActivity extends AppCompatActivity {
                 ParseUser user = new ParseUser();
                 user.setUsername(usernameInput.getText().toString());
                 user.setPassword(passwordInput.getText().toString());
+                if (emailInput.getText().toString() != null) {
+                    user.setEmail(emailInput.getText().toString());
+                }
                 user.signUpInBackground(new SignUpCallback() {
                     @Override
                     public void done(com.parse.ParseException e) {

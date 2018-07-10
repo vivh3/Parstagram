@@ -22,13 +22,25 @@
         android:textSize="14sp" />
 
     <EditText
+        android:id="@+id/etEmail"
+        style="@style/LoginActivityEditTextTheme"
+        android:layout_width="235dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/etPassword"
+        android:layout_centerHorizontal="true"
+        android:ems="10"
+        android:hint="Email (Optional Signup Field)"
+        android:inputType="textEmailAddress"
+        android:textSize="14sp" />
+
+    <EditText
         android:id="@+id/etPassword"
+        style="@style/LoginActivityEditTextTheme"
         android:layout_width="235dp"
         android:layout_height="wrap_content"
         android:layout_below="@+id/etUsername"
         android:layout_centerHorizontal="true"
         android:ems="10"
-        style="@style/LoginActivityEditTextTheme"
         android:hint="Password"
         android:inputType="textPassword"
         android:textSize="14sp" />
@@ -39,7 +51,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="173dp"
+        android:layout_marginBottom="119dp"
         android:background="?attr/colorControlHighlight"
         android:text="Login"
         android:textColor="?attr/colorButtonNormal"

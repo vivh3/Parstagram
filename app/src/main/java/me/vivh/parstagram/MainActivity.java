@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
         if (currentUser != null) {
             // go directly to the feed
             Log.d("LoginActivity", "Already signed in!");
-            final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            final Intent intent = new Intent(MainActivity.this, FeedActivity.class);
             startActivity(intent);
             finish();
         } else {
@@ -84,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
             public void done(ParseUser user, ParseException e) {
                 if (user != null) {
                     Log.d("LoginActivity", "Login successful!");
-                    final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+                    final Intent intent = new Intent(MainActivity.this, FeedActivity.class);
                     startActivity(intent);
                     finish();
                 } else {

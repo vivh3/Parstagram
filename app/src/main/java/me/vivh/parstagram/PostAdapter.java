@@ -38,7 +38,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public void onBindViewHolder(ViewHolder holder, int position) {
         Post post = mPosts.get(position);
         holder.tvDesc.setText(post.getDescription());
-
         Glide.with(context)
                 .load(post.getImage())
                 .into(holder.ivImage);

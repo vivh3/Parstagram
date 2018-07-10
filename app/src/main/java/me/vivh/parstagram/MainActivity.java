@@ -30,51 +30,59 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        ButterKnife.bind(this);
 
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                final String username = usernameInput.getText().toString();
-                final String password = passwordInput.getText().toString();
-
-                login(username, password);
-            }
-        });
-
-         signupBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Sign up a new ParseUser
-                ParseUser user = new ParseUser();
-                user.setUsername(usernameInput.getText().toString());
-                user.setPassword(passwordInput.getText().toString());
-                if (emailInput.getText().toString() != null) {
-                    user.setEmail(emailInput.getText().toString());
+        // persist user if haven't logged out
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        if (currentUser != null) {
+            // go directly to the feed
+            Log.d("LoginActivity", "Already signed in!");
+            final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
+            startActivity(intent);
+            finish();
+        } else {
+            // show the signup or login screen
+            setContentView(R.layout.activity_main);
+            ButterKnife.bind(this);
+            loginBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String username = usernameInput.getText().toString();
+                    final String password = passwordInput.getText().toString();
+                    login(username, password);
                 }
-                user.signUpInBackground(new SignUpCallback() {
-                    @Override
-                    public void done(com.parse.ParseException e) {
-                        if (e == null) {
-                            Toast.makeText(getApplicationContext(), "Registered.", Toast.LENGTH_LONG).show();
+            });
 
-                        } else {
-                            Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                        }
+            signupBtn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    // Sign up a new ParseUser
+                    ParseUser user = new ParseUser();
+                    user.setUsername(usernameInput.getText().toString());
+                    user.setPassword(passwordInput.getText().toString());
+                    if (emailInput.getText().toString() != null) {
+                        user.setEmail(emailInput.getText().toString());
                     }
-                });
-            }
-        });
+                    user.signUpInBackground(new SignUpCallback() {
+                        @Override
+                        public void done(com.parse.ParseException e) {
+                            if (e == null) {
+                                Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_LONG).show();
 
-
+                            } else {
+                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
+                            }
+                        }
+                    });
+                }
+            });
+        }
     }
 
     private void login(String username, String password) {
         ParseUser.logInInBackground(username, password, new LogInCallback() {
             @Override
             public void done(ParseUser user, ParseException e) {
-                if (e == null) {
+                if (user != null) {
                     Log.d("LoginActivity", "Login successful!");
                     final Intent intent = new Intent(MainActivity.this, HomeActivity.class);
                     startActivity(intent);

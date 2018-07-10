@@ -1,5 +1,6 @@
 package me.vivh.parstagram;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -26,6 +27,7 @@ public class HomeActivity extends AppCompatActivity {
     @BindView(R.id.etDescription) TextView descriptionInput;
     @BindView(R.id.btnCreate) Button createButton;
     @BindView(R.id.btnRefresh) Button refreshButton;
+    @BindView(R.id.btnLogOut) Button logOutButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -59,6 +61,18 @@ public class HomeActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 loadTopPosts();
+            }
+        });
+
+        logOutButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                ParseUser.logOut();
+                ParseUser currentUser = ParseUser.getCurrentUser(); // this will now be null
+                Log.d("HomeActivity", "Log out successful!");
+                final Intent intent = new Intent(HomeActivity.this, MainActivity.class);
+                startActivity(intent);
+                finish();
             }
         });
     }

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="10dp">
+
+    <ImageView
+        android:id="@+id/ivImage"
+        android:layout_width="250dp"
+        android:layout_height="232dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="21dp"
+        android:padding="5dp"
+        android:src="@drawable/ic_launcher_foreground"
+        tools:background="@color/backgroundLight"
+        tools:layout_editor_absoluteX="53dp"
+        tools:layout_editor_absoluteY="16dp" />
+
+    <TextView
+        android:id="@+id/tvUser"
+        android:layout_width="248dp"
+        android:layout_height="27dp"
+        android:layout_below="@+id/ivImage"
+        android:layout_centerHorizontal="true"
+        android:text="Username" />
+
+    <TextView
+        android:id="@+id/tvDescription"
+        android:layout_width="248dp"
+        android:layout_height="45dp"
+        android:layout_below="@+id/tvUser"
+        android:layout_centerHorizontal="true"
+        android:text="CAPTION HELLO HI THERE WELCOME TO CHILI'S"
+        android:textColor="@color/colorPrimaryDark" />
+</RelativeLayout>

@@ -84,7 +84,7 @@
         android:layout_below="@+id/ic_logo"
         android:layout_centerHorizontal="true"
         android:fontFamily="cursive"
-        android:text="The Fake Version"
+        android:text="(The Fake Version)"
         android:textColor="@color/white"
         android:textSize="20sp"
         android:textStyle="bold" />

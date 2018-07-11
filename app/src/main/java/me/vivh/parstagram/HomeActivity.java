@@ -35,6 +35,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import me.vivh.parstagram.model.Post;
 
+//This class is not used (serves as a reference)
 public class HomeActivity extends AppCompatActivity {
 
     private static final String imagePath = "/storage/self/primary/DCIM/Camera/20180709_012712.jpg";

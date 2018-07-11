@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.FileProvider;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,7 +46,7 @@ public class AddPostFragment extends Fragment {
 
     public final String APP_TAG = "MyCustomApp";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
-    public String photoFileName = "photo.jpg";
+    public String photoFileName = "photo";
     File photoFile;
 
     Button cameraButton;
@@ -196,7 +198,7 @@ public class AddPostFragment extends Fragment {
                 // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
                 Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.codepath.fileprovider", photoFile);
                 // See BitmapScaler.java: https://gist.github.com/nesquena/3885707fd3773c09f1bb
-                Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(takenImage, 750);
+                Bitmap resizedBitmap = BitmapScaler.scaleToFill(takenImage, 1000,1000);
 
                 // Configure byte output stream
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -223,10 +225,11 @@ public class AddPostFragment extends Fragment {
                 }
 
                 // Load the taken image into a preview
-                imageView.setImageBitmap(takenImage);
+                imageView.setImageBitmap(resizedBitmap);
             } else { // Result was a failure
                 Toast.makeText(getActivity(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
+
         }
     }
 
@@ -240,9 +243,15 @@ public class AddPostFragment extends Fragment {
                     newPost.setImage(imageFile);
                     newPost.setUser(user);
                     newPost.saveInBackground();
-
                     Toast.makeText(getContext(),"Post created!",Toast.LENGTH_LONG).show();
                     Log.d("AddPostFragment", description);
+
+                    // replace existing fragment with feed inside the frame
+                    FeedFragment feedFragment = new FeedFragment();
+                    FragmentManager fm = getActivity().getSupportFragmentManager();
+                    FragmentTransaction ft = fm.beginTransaction();
+                    ft.replace(R.id.fragmentPlace, feedFragment);
+                    ft.commit();
                 } else {
                     e.printStackTrace();
                     Toast.makeText(getContext(),"Failed to post",Toast.LENGTH_LONG).show();

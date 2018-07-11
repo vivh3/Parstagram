@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/ivImage"
-        android:layout_width="334dp"
-        android:layout_height="291dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_below="@id/tvUser"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="2dp"
@@ -45,6 +45,5 @@
         android:layout_marginLeft="10dp"
         android:text="CAPTION: HI, WELCOME TO CHILI'S"
         android:textColor="@color/colorPrimaryDark" />
-
 
 </RelativeLayout>

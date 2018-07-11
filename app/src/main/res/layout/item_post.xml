@@ -34,7 +34,7 @@
         android:layout_height="27dp"
         android:layout_alignParentTop="true"
         android:layout_marginTop="15dp"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="10dp"
         android:text="Username" />
 
     <TextView
@@ -42,7 +42,7 @@
         android:layout_width="248dp"
         android:layout_height="45dp"
         android:layout_below="@+id/iconBar"
-        android:layout_marginLeft="8dp"
+        android:layout_marginLeft="10dp"
         android:text="CAPTION: HI, WELCOME TO CHILI'S"
         android:textColor="@color/colorPrimaryDark" />
 

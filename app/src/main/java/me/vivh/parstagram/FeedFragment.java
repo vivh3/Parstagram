@@ -48,7 +48,6 @@ public class FeedFragment extends Fragment {
 
 
     public void getConfiguration() {
-
     }
 
     public void loadTopPosts(){
@@ -63,11 +62,12 @@ public class FeedFragment extends Fragment {
             public void done(List<Post> objects, ParseException e) {
                 if (e==null){
                     Post post = new Post();
-                    for (int i = 0;i<objects.size(); i++){
+                    for (int i = 0; i < objects.size(); i++){
                         Log.d("FeedActivity", "Post ["+i+"] = "
-                                + objects.get(i).getDescription());
+                                + objects.get(i).getDescription()
+                                + "\n username = " + objects.get(i).getUser().getUsername());
 
-                        posts.add(objects.get(i));
+                        posts.add(0,objects.get(i));
                         adapter.notifyItemInserted(posts.size()-1);
 
                     }

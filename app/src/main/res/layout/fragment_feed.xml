@@ -10,9 +10,9 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvPosts"
-        android:layout_marginTop="110dp"
         android:layout_width="match_parent"
-        android:layout_height="470dp" />
+        android:layout_height="669dp"
+        android:layout_marginTop="110dp" />
 
     <ImageView
         android:id="@+id/imageView2"

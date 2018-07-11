@@ -192,7 +192,7 @@ public class AddPostFragment extends Fragment {
                 // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
                 Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.codepath.fileprovider", photoFile);
                 // See BitmapScaler.java: https://gist.github.com/nesquena/3885707fd3773c09f1bb
-                Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(takenImage, 190);
+                Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(takenImage, 250);
 
                 // Configure byte output stream
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -221,7 +221,7 @@ public class AddPostFragment extends Fragment {
                 // Load the taken image into a preview
                 imageView.setImageBitmap(takenImage);
             } else { // Result was a failure
-                Toast.makeText(getContext(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getActivity(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
     }
@@ -237,7 +237,7 @@ public class AddPostFragment extends Fragment {
                     newPost.setUser(user);
                     newPost.saveInBackground();
 
-                    Toast.makeText(getContext(),"Post created!",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getActivity(),"Post created!",Toast.LENGTH_LONG).show();
                     Log.d("AddPostFragment", description);
                 } else {
                     e.printStackTrace();

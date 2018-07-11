@@ -14,7 +14,7 @@
         android:layout_height="291dp"
         android:layout_below="@id/tvUser"
         android:layout_centerHorizontal="true"
-        android:padding="5dp"
+        android:layout_marginTop="2dp"
         android:src="@drawable/ic_launcher_foreground"
         tools:background="@color/backgroundLight"
         tools:layout_editor_absoluteX="53dp"

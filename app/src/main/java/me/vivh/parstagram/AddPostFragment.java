@@ -68,7 +68,6 @@ public class AddPostFragment extends Fragment {
         description = (EditText) rootView.findViewById(R.id.etDescription);
         postBtn = (Button) rootView.findViewById(R.id.btnPost);
 
-
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -87,9 +86,10 @@ public class AddPostFragment extends Fragment {
                 final String desc = description.getText().toString();
                 final ParseUser currUser = ParseUser.getCurrentUser();
                 final File file = photoFile;
+                final String time = getCurrentTime();
 
                 parseFile = new ParseFile(file);
-                postPhoto(desc, parseFile, currUser);
+                postPhoto(desc, parseFile, currUser, time);
             }
         });
         return rootView;
@@ -106,11 +106,12 @@ public class AddPostFragment extends Fragment {
         return file;
     }
 
-    private void createPost(String description, ParseFile imageFile, ParseUser user) {
+    private void createPost(String description, ParseFile imageFile, ParseUser user, String time) {
         final Post newPost = new Post();
         newPost.setDescription(description);
         newPost.setImage(imageFile);
         newPost.setUser(user);
+        newPost.setTime(time);
 
         newPost.saveInBackground(new SaveCallback() {
             @Override
@@ -229,11 +230,10 @@ public class AddPostFragment extends Fragment {
             } else { // Result was a failure
                 Toast.makeText(getActivity(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
-
         }
     }
 
-    public void postPhoto(final String description, final ParseFile imageFile, final ParseUser user){
+    public void postPhoto(final String description, final ParseFile imageFile, final ParseUser user, final String time){
         imageFile.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -242,6 +242,7 @@ public class AddPostFragment extends Fragment {
                     newPost.setDescription(description);
                     newPost.setImage(imageFile);
                     newPost.setUser(user);
+                    newPost.setTime(time);
                     newPost.saveInBackground();
                     Toast.makeText(getContext(),"Post created!",Toast.LENGTH_LONG).show();
                     Log.d("AddPostFragment", description);

@@ -43,12 +43,14 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public ImageView ivImage;
     public TextView tvUserName;
     public TextView tvDesc;
+    public TextView tvTime;
 
     public ViewHolder(View itemView) {
       super(itemView);
       ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
       tvUserName = (TextView) itemView.findViewById(R.id.tvUser);
       tvDesc = (TextView) itemView.findViewById(R.id.tvDescription);
+      tvTime = (TextView) itemView.findViewById(R.id.tvTime);
     }
   }
 
@@ -58,6 +60,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     holder.tvDesc.setText(post.getDescription());
     holder.tvUserName.setText(post.getUser().getUsername());
     Glide.with(context).load(post.getImage().getUrl()).into(holder.ivImage);
+    holder.tvTime.setText(post.getTime());
   }
 
     // Clean all elements of the recycler

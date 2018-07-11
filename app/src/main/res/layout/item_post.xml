@@ -5,27 +5,37 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:layout_marginBottom="10dp">
 
     <ImageView
         android:id="@+id/ivImage"
-        android:layout_width="250dp"
-        android:layout_height="232dp"
+        android:layout_width="283dp"
+        android:layout_height="250dp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="21dp"
+        android:layout_marginTop="8dp"
         android:padding="5dp"
         android:src="@drawable/ic_launcher_foreground"
         tools:background="@color/backgroundLight"
         tools:layout_editor_absoluteX="53dp"
         tools:layout_editor_absoluteY="16dp" />
 
+    <ImageView
+        android:id="@+id/iconBar"
+        android:layout_width="match_parent"
+        android:layout_height="53dp"
+        android:layout_below="@+id/ivImage"
+        android:scaleType="fitStart"
+        app:srcCompat="@drawable/icons_below_photo" />
+
     <TextView
         android:id="@+id/tvUser"
         android:layout_width="248dp"
         android:layout_height="27dp"
-        android:layout_below="@+id/ivImage"
-        android:layout_centerHorizontal="true"
+        android:layout_below="@+id/iconBar"
+        android:layout_marginTop="5dp"
+        android:layout_marginLeft="5dp"
         android:text="Username" />
 
     <TextView
@@ -33,7 +43,11 @@
         android:layout_width="248dp"
         android:layout_height="45dp"
         android:layout_below="@+id/tvUser"
-        android:layout_centerHorizontal="true"
-        android:text="CAPTION HELLO HI THERE WELCOME TO CHILI'S"
+        android:layout_marginLeft="5dp"
+        android:text="CAPTION: HI, WELCOME TO CHILI'S"
         android:textColor="@color/colorPrimaryDark" />
+
+
+
+
 </RelativeLayout>

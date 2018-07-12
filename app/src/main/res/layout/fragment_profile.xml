@@ -16,6 +16,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginStart="18dp"
         android:layout_marginTop="25dp"
+        android:layout_toRightOf="@id/ivProfilePic"
         android:text="tvUserName"
         android:textAlignment="center"
         android:textSize="24sp" />
@@ -24,20 +25,35 @@
         android:id="@+id/btnLogout"
         android:layout_width="236dp"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_gravity="center"
+        android:layout_marginBottom="80dp"
         android:background="@drawable/background_gradient"
         android:text="Log Out"
-        android:layout_gravity= "center"
-        android:layout_centerVertical="true"
-        android:layout_centerHorizontal="true"
         android:textColor="@color/colorTextHint" />
+"
 
     <ImageView
         android:id="@+id/ivProfilePic"
-        android:layout_width="144dp"
-        android:layout_height="115dp"
+        android:layout_width="140dp"
+        android:layout_height="143dp"
         android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="103dp"
+        android:layout_gravity="left"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
         android:src="@drawable/instagram_user_outline_24" />
+
+    <Button
+        android:id="@+id/btnEditProfile"
+        android:layout_width="wrap_content"
+        android:layout_height="35dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignStart="@+id/tvUserName"
+        android:layout_gravity="center"
+        android:layout_marginTop="70dp"
+        android:background="@color/white"
+        android:text="Edit Profile"
+        android:textAllCaps="false" />
 
 </RelativeLayout>

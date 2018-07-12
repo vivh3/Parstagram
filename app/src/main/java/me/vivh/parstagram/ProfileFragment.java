@@ -3,6 +3,8 @@ package me.vivh.parstagram;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,9 +20,11 @@ import com.parse.ParseUser;
 
 public class ProfileFragment extends Fragment {
 
-    Button logOutButton;
+    Button logOutBtn;
     TextView tvUserName;
     ImageView ivProfilePic;
+    Button editProfileBtn;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -28,9 +32,10 @@ public class ProfileFragment extends Fragment {
         // Inflate the layout for this fragment
         final View rootView = inflater.inflate(R.layout.fragment_profile, container, false);
 
-        logOutButton = rootView.findViewById(R.id.btnLogout);
+        logOutBtn = rootView.findViewById(R.id.btnLogout);
         tvUserName = rootView.findViewById(R.id.tvUserName);
         ivProfilePic = rootView.findViewById(R.id.ivProfilePic);
+        editProfileBtn = (Button) rootView.findViewById(R.id.btnEditProfile);
 
         ParseUser currentUser = ParseUser.getCurrentUser();
 
@@ -46,7 +51,19 @@ public class ProfileFragment extends Fragment {
                 .apply(RequestOptions.circleCropTransform())
                 .into(ivProfilePic);
 
-        logOutButton.setOnClickListener(new View.OnClickListener() {
+        editProfileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // replace existing fragment with feed inside the frame
+                EditProfileFragment editProfileFragment = new EditProfileFragment();
+                FragmentManager fm = getActivity().getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragmentPlace, editProfileFragment);
+                ft.commit();
+            }
+        });
+
+        logOutBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ParseUser.logOut();

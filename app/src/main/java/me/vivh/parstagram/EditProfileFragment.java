@@ -1,6 +1,5 @@
 package me.vivh.parstagram;
 
-import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -19,12 +18,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.parse.FindCallback;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseException;
 import com.parse.ParseFile;
 import com.parse.ParseUser;
@@ -35,41 +35,48 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.List;
-
-import me.vivh.parstagram.model.Post;
 
 import static android.app.Activity.RESULT_OK;
 
-public class AddPostFragment extends Fragment {
+public class EditProfileFragment extends Fragment {
 
-    public final String APP_TAG = "MyCustomApp";
+    public final String APP_TAG = "MyCustomApp2";
     public final static int CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE = 1034;
     public String photoFileName = "photo";
     File photoFile;
 
     Button cameraBtn;
-    ImageView imageView;
-    EditText description;
+    ImageView ivPreview;
     Button postBtn;
     ParseFile parseFile;
     ProgressBar pb;
+    TextView tvUserName;
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        final View rootView = inflater.inflate(R.layout.fragment_add_post,
+        final View rootView = inflater.inflate(R.layout.fragment_edit_profile,
                 container, false);
 
         cameraBtn = (Button) rootView.findViewById(R.id.btnCamera);
-        imageView = (ImageView) rootView.findViewById(R.id.ivPreview);
-        description = (EditText) rootView.findViewById(R.id.etDescription);
+        ivPreview = (ImageView) rootView.findViewById(R.id.ivPreview);
         postBtn = (Button) rootView.findViewById(R.id.btnPost);
         pb = (ProgressBar) rootView.findViewById(R.id.pbLoading);
+        tvUserName = (TextView) rootView.findViewById(R.id.tvUserName);
+
+        // load existing username and profile pic
+        ParseUser currentUser = ParseUser.getCurrentUser();
+        tvUserName.setText(currentUser.getUsername());
+        String profilePicUrl = "";
+        if (currentUser.getParseFile("profilePic") != null) {
+            profilePicUrl = currentUser.getParseFile("profilePic").getUrl();
+        }
+        Glide.with(getContext()).load(profilePicUrl)
+                .apply(new RequestOptions().placeholder(R.drawable.instagram_user_outline_24))
+                .apply(RequestOptions.circleCropTransform())
+                .into(ivPreview);
 
         cameraBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,48 +93,14 @@ public class AddPostFragment extends Fragment {
         postBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                final String desc = description.getText().toString();
                 final ParseUser currUser = ParseUser.getCurrentUser();
                 final File file = photoFile;
-                final String time = getCurrentTime();
-
                 parseFile = new ParseFile(file);
-                postPhoto(desc, parseFile, currUser, time);
+
+                postPhoto(parseFile, currUser);
             }
         });
         return rootView;
-    }
-
-    private static File getImageFile(Context context) throws IOException {
-        ///storage/self/primary/DCIM/Camera/
-        String currentTime = getCurrentTime();
-
-        // Get safe storage directory for photos
-        // Use `getExternalFilesDir` on Context to access package-specific directories.
-        // This way, we don't need to request external read/write runtime permissions.
-        File file = new File(context.getExternalFilesDir(Environment.DIRECTORY_PICTURES), "/" + currentTime + ".jpg");
-        return file;
-    }
-
-
-    private void loadTopPosts() {
-        final Post.Query postsQuery = new Post.Query();
-        postsQuery.getTop().withUser();
-
-        postsQuery.findInBackground(new FindCallback<Post>() {
-            @Override
-            public void done(List<Post> objects, ParseException e) {
-                if (e == null) {
-                    for (int i = 0; i < objects.size(); i++) {
-                        Log.d("AddPostFragment","Post[" + i + "] = "
-                                + objects.get(i).getDescription()
-                                + "\nusername = " + objects.get(i).getUser().getUsername());
-                    }
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
     }
 
     public void onLaunchCamera(View view) throws IOException {
@@ -172,7 +145,7 @@ public class AddPostFragment extends Fragment {
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == CAPTURE_IMAGE_ACTIVITY_REQUEST_CODE) {
             if (resultCode == RESULT_OK) {
-                // RESIZE BITMAP, see section below
+                // RESIZE BITMAP
                 // Create a File reference to access to future access
                 photoFile = getPhotoFileUri(photoFileName + ".jpg");
                 // rotate bitmap orientation
@@ -182,7 +155,7 @@ public class AddPostFragment extends Fragment {
                 // wrap File object into a content provider
                 Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.codepath.fileprovider", photoFile);
                 // See BitmapScaler.java: https://gist.github.com/nesquena/3885707fd3773c09f1bb
-                Bitmap resizedBitmap = BitmapScaler.scaleToFill(takenImage, 1000,1000);
+                Bitmap resizedBitmap = BitmapScaler.scaleToFill(takenImage, 500,500);
 
                 // Configure byte output stream
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -209,40 +182,34 @@ public class AddPostFragment extends Fragment {
                 }
 
                 // Load the taken image into a preview
-                imageView.setImageBitmap(resizedBitmap);
+                ivPreview.setImageBitmap(resizedBitmap);
             } else { // Result was a failure
                 Toast.makeText(getActivity(), "Picture wasn't taken!", Toast.LENGTH_SHORT).show();
             }
         }
     }
 
-    public void postPhoto(final String description, final ParseFile imageFile, final ParseUser user, final String time){
+    public void postPhoto(final ParseFile imageFile, final ParseUser user){
         pb.setVisibility(ProgressBar.VISIBLE);
         imageFile.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
                 if (e == null){
-                    final Post newPost = new Post();
-                    newPost.setDescription(description);
-                    newPost.setImage(imageFile);
-                    newPost.setUser(user);
-                    newPost.setTime(time);
-                    newPost.saveInBackground();
-
+                    user.put("profilePic", imageFile);
+                    user.saveInBackground();
                     // once background job is complete
                     pb.setVisibility(ProgressBar.INVISIBLE);
-                    Toast.makeText(getContext(),"Post created!",Toast.LENGTH_LONG).show();
-                    Log.d("AddPostFragment", description);
+                    Toast.makeText(getContext(),"Photo changed!",Toast.LENGTH_LONG).show();
 
-                    // replace existing fragment with feed inside the frame
-                    FeedFragment feedFragment = new FeedFragment();
+                    // replace existing fragment with profile fragment inside the frame
+                    ProfileFragment profileFragment = new ProfileFragment();
                     FragmentManager fm = getActivity().getSupportFragmentManager();
                     FragmentTransaction ft = fm.beginTransaction();
-                    ft.replace(R.id.fragmentPlace, feedFragment);
+                    ft.replace(R.id.fragmentPlace, profileFragment);
                     ft.commit();
                 } else {
                     e.printStackTrace();
-                    Toast.makeText(getContext(),"Failed to post",Toast.LENGTH_LONG).show();
+                    Toast.makeText(getContext(),"Failed to change photo",Toast.LENGTH_LONG).show();
                 }
             }
         });
@@ -289,9 +256,5 @@ public class AddPostFragment extends Fragment {
         Bitmap rotatedBitmap = Bitmap.createBitmap(bm, 0, 0, bounds.outWidth, bounds.outHeight, matrix, true);
         // Return result
         return rotatedBitmap;
-    }
-
-    public static String getCurrentTime() {
-        return new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy").format(new Date());
     }
 }

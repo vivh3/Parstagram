@@ -89,7 +89,8 @@ public class FeedFragment extends Fragment {
                     for (int i = 0; i < objects.size(); i++){
                         Log.d("FeedActivity", "Post ["+i+"] = "
                                 + objects.get(i).getDescription()
-                                + "\n username = " + objects.get(i).getUser().getUsername());
+                                + "\n username = " + objects.get(i).getUser().getUsername()
+                                + "\n timestamp = " + objects.get(i).getTime());
 
                         posts.add(0,objects.get(i));
                         adapter.notifyItemInserted(posts.size()-1);

@@ -56,7 +56,6 @@
         android:layout_marginTop="3dp"
         android:text="tvTime" />
 
-
     <ImageView
         android:id="@+id/ivProfilePic"
         android:layout_width="40dp"

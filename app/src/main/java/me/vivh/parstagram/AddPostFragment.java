@@ -199,7 +199,7 @@ public class AddPostFragment extends Fragment {
                 // See https://guides.codepath.com/android/Sharing-Content-with-Intents#sharing-files-with-api-24-or-higher
                 Uri fileProvider = FileProvider.getUriForFile(getContext(), "com.codepath.fileprovider", photoFile);
                 // See BitmapScaler.java: https://gist.github.com/nesquena/3885707fd3773c09f1bb
-                Bitmap resizedBitmap = BitmapScaler.scaleToFill(takenImage, 1000,1000);
+                Bitmap resizedBitmap = BitmapScaler.scaleToFitWidth(takenImage, 1000);
 
                 // Configure byte output stream
                 ByteArrayOutputStream bytes = new ByteArrayOutputStream();
@@ -305,6 +305,6 @@ public class AddPostFragment extends Fragment {
     }
 
     public static String getCurrentTime() {
-        return new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
+        return new SimpleDateFormat("EEE MMM dd HH:mm:ss ZZZZZ yyyy").format(new Date());
     }
 }

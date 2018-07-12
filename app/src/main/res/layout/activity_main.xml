@@ -10,28 +10,14 @@
 
     <EditText
         android:id="@+id/etUsername"
+        style="@style/LoginActivityEditTextTheme"
         android:layout_width="235dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="222dp"
+        android:layout_centerInParent="true"
         android:ems="10"
-        style="@style/LoginActivityEditTextTheme"
         android:hint="Username"
         android:inputType="textPersonName"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/etEmail"
-        style="@style/LoginActivityEditTextTheme"
-        android:layout_width="235dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/etPassword"
-        android:layout_centerHorizontal="true"
-        android:ems="10"
-        android:hint="Email (Optional Signup Field)"
-        android:inputType="textEmailAddress"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <EditText
         android:id="@+id/etPassword"
@@ -43,7 +29,7 @@
         android:ems="10"
         android:hint="Password"
         android:inputType="textPassword"
-        android:textSize="14sp" />
+        android:textSize="16sp" />
 
     <Button
         android:id="@+id/btnLogin"
@@ -81,8 +67,9 @@
         android:id="@+id/fakeTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/ic_logo"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginTop="181dp"
         android:fontFamily="cursive"
         android:text="(The Fake Version)"
         android:textColor="@color/white"

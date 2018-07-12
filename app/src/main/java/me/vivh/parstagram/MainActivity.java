@@ -7,12 +7,10 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.parse.LogInCallback;
 import com.parse.ParseException;
 import com.parse.ParseUser;
-import com.parse.SignUpCallback;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -22,7 +20,6 @@ public class MainActivity extends AppCompatActivity {
     // Automatically finds each field by the specified ID.
     @BindView(R.id.etUsername) TextView usernameInput;
     @BindView(R.id.etPassword) TextView passwordInput;
-    @BindView(R.id.etEmail) TextView emailInput;
     @BindView(R.id.btnLogin) TextView loginBtn;
     @BindView(R.id.fakeTitle) TextView fakeTitle;
     @BindView(R.id.btnSignUp) Button signupBtn;
@@ -55,24 +52,8 @@ public class MainActivity extends AppCompatActivity {
             signupBtn.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    // Sign up a new ParseUser
-                    ParseUser user = new ParseUser();
-                    user.setUsername(usernameInput.getText().toString());
-                    user.setPassword(passwordInput.getText().toString());
-                    if (emailInput.getText().toString() != null) {
-                        user.setEmail(emailInput.getText().toString());
-                    }
-                    user.signUpInBackground(new SignUpCallback() {
-                        @Override
-                        public void done(com.parse.ParseException e) {
-                            if (e == null) {
-                                Toast.makeText(getApplicationContext(), "Registered", Toast.LENGTH_LONG).show();
-
-                            } else {
-                                Toast.makeText(getApplicationContext(), e.getMessage(), Toast.LENGTH_LONG).show();
-                            }
-                        }
-                    });
+                    final Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                    startActivity(intent);
                 }
             });
         }
@@ -88,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
                     startActivity(intent);
                     finish();
                 } else {
-                    Log.e("LoginActivity", "Login failure.");
+                    Log.e("LoginActivity", "Login failure");
                     e.printStackTrace();
                 }
             }

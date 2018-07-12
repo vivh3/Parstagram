@@ -21,6 +21,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.parse.FindCallback;
@@ -54,6 +55,7 @@ public class AddPostFragment extends Fragment {
     EditText description;
     Button postBtn;
     ParseFile parseFile;
+    ProgressBar pb;
 
 
     @Override
@@ -67,6 +69,7 @@ public class AddPostFragment extends Fragment {
         imageView = (ImageView) rootView.findViewById(R.id.ivPreview);
         description = (EditText) rootView.findViewById(R.id.etDescription);
         postBtn = (Button) rootView.findViewById(R.id.btnPost);
+        pb = (ProgressBar) rootView.findViewById(R.id.pbLoading);
 
         cameraButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -106,24 +109,6 @@ public class AddPostFragment extends Fragment {
         return file;
     }
 
-    private void createPost(String description, ParseFile imageFile, ParseUser user, String time) {
-        final Post newPost = new Post();
-        newPost.setDescription(description);
-        newPost.setImage(imageFile);
-        newPost.setUser(user);
-        newPost.setTime(time);
-
-        newPost.saveInBackground(new SaveCallback() {
-            @Override
-            public void done(ParseException e) {
-                if (e == null) {
-                    Log.d("AddPostFragment", "Create post success!");
-                } else {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
 
     private void loadTopPosts() {
         final Post.Query postsQuery = new Post.Query();
@@ -234,6 +219,7 @@ public class AddPostFragment extends Fragment {
     }
 
     public void postPhoto(final String description, final ParseFile imageFile, final ParseUser user, final String time){
+        pb.setVisibility(ProgressBar.VISIBLE);
         imageFile.saveInBackground(new SaveCallback() {
             @Override
             public void done(ParseException e) {
@@ -244,6 +230,9 @@ public class AddPostFragment extends Fragment {
                     newPost.setUser(user);
                     newPost.setTime(time);
                     newPost.saveInBackground();
+
+                    // once background job is complete
+                    pb.setVisibility(ProgressBar.INVISIBLE);
                     Toast.makeText(getContext(),"Post created!",Toast.LENGTH_LONG).show();
                     Log.d("AddPostFragment", description);
 

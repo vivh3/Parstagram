@@ -70,6 +70,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     }
     holder.tvDesc.setText(post.getDescription());
     holder.tvUserName.setText(post.getUser().getUsername());
+    holder.ivImage.layout(0,0,0,0);
     Glide.with(context).load(post.getImage().getUrl()).into(holder.ivImage);
     holder.tvTime.setText(getRelativeTimeAgo(post.getTime()));
     Glide.with(context).load(profilePicUrl)

@@ -53,4 +53,15 @@
         android:textColor="@color/black"
         android:hint="Write a caption..." />
 
+    <ProgressBar
+        android:id="@+id/pbLoading"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentTop="true"
+        android:indeterminate="true"
+        android:indeterminateDrawable="@xml/progress"
+        android:visibility="invisible"
+        android:layout_gravity="center"
+        android:layout_marginTop="-150dp" />
+
 </FrameLayout>

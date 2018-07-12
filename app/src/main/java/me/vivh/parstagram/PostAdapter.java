@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -17,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Locale;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import me.vivh.parstagram.model.Post;
 
 public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
@@ -45,19 +48,23 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
 
   public static class ViewHolder extends RecyclerView.ViewHolder {
 
-    public ImageView ivImage;
-    public TextView tvUserName;
-    public TextView tvDesc;
-    public TextView tvTime;
-    public ImageView ivProfilePic;
+      @BindView(R.id.ivImage) ImageView ivImage;
+      @BindView(R.id.tvUser) TextView tvUserName;
+      @BindView(R.id.tvDescription) TextView tvDesc;
+      @BindView(R.id.tvTime) TextView tvTime;
+      @BindView(R.id.ivProfilePic) ImageView ivProfilePic;
+      @BindView(R.id.ibLike) ImageButton ibLike;
 
     public ViewHolder(View itemView) {
       super(itemView);
-      ivImage = (ImageView) itemView.findViewById(R.id.ivImage);
-      tvUserName = (TextView) itemView.findViewById(R.id.tvUser);
-      tvDesc = (TextView) itemView.findViewById(R.id.tvDescription);
-      tvTime = (TextView) itemView.findViewById(R.id.tvTime);
-      ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
+      ButterKnife.bind(this, itemView);
+
+      ibLike.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              view.setSelected(!view.isSelected());
+          }
+      });
     }
   }
 

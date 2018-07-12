@@ -41,7 +41,6 @@ public class FeedFragment extends Fragment {
         rvPost = (RecyclerView) rootView.findViewById(R.id.rvPosts);
         swipeContainer = (SwipeRefreshLayout) rootView.findViewById(R.id.swipeContainer);
 
-
         rvPost.setLayoutManager(new LinearLayoutManager(getContext()));
         rvPost.setAdapter(adapter);
 

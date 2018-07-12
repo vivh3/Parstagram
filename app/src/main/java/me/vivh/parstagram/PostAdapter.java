@@ -9,6 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 
 import java.util.List;
 
@@ -44,6 +45,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     public TextView tvUserName;
     public TextView tvDesc;
     public TextView tvTime;
+    public ImageView ivProfilePic;
 
     public ViewHolder(View itemView) {
       super(itemView);
@@ -51,6 +53,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
       tvUserName = (TextView) itemView.findViewById(R.id.tvUser);
       tvDesc = (TextView) itemView.findViewById(R.id.tvDescription);
       tvTime = (TextView) itemView.findViewById(R.id.tvTime);
+      ivProfilePic = (ImageView) itemView.findViewById(R.id.ivProfilePic);
     }
   }
 
@@ -61,6 +64,10 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
     holder.tvUserName.setText(post.getUser().getUsername());
     Glide.with(context).load(post.getImage().getUrl()).into(holder.ivImage);
     holder.tvTime.setText(post.getTime());
+    Glide.with(context).load(R.drawable.instagram_user_outline_24)
+            .apply(RequestOptions.circleCropTransform())
+            .apply(new RequestOptions().placeholder(R.drawable.instagram_user_outline_24))
+            .into(holder.ivProfilePic);
   }
 
     // Clean all elements of the recycler

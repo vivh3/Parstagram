@@ -8,8 +8,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.parse.ParseUser;
 
 
@@ -17,6 +20,7 @@ public class ProfileFragment extends Fragment {
 
     Button logOutButton;
     TextView tvUserName;
+    ImageView ivProfilePic;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -26,10 +30,21 @@ public class ProfileFragment extends Fragment {
 
         logOutButton = rootView.findViewById(R.id.btnLogout);
         tvUserName = rootView.findViewById(R.id.tvUserName);
+        ivProfilePic = rootView.findViewById(R.id.ivProfilePic);
 
-        String currentUser = ParseUser.getCurrentUser().getUsername();
-        System.out.println("User currently signed in: "+ currentUser);
-        tvUserName.setText(currentUser);
+        ParseUser currentUser = ParseUser.getCurrentUser();
+
+        String currentUsername = currentUser.getUsername();
+        tvUserName.setText(currentUsername);
+
+        String profilePicUrl = "";
+        if (currentUser.getParseFile("profilePic") != null) {
+            profilePicUrl = currentUser.getParseFile("profilePic").getUrl();
+        }
+        Glide.with(getContext()).load(profilePicUrl)
+                .apply(new RequestOptions().placeholder(R.drawable.instagram_user_outline_24))
+                .apply(RequestOptions.circleCropTransform())
+                .into(ivProfilePic);
 
         logOutButton.setOnClickListener(new View.OnClickListener() {
             @Override

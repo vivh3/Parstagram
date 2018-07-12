@@ -31,8 +31,6 @@ public class SignUpActivity extends AppCompatActivity {
 
         ParseUser.getCurrentUser().logOut();
 
-        //getSupportActionBar().hide();
-
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

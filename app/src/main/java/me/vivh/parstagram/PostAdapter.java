@@ -64,13 +64,17 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
   @Override
   public void onBindViewHolder(ViewHolder holder, int position) {
     Post post = mPosts.get(position);
+    String profilePicUrl = "";
+    if (post.getUser().getParseFile("profilePic") != null) {
+        profilePicUrl = post.getUser().getParseFile("profilePic").getUrl();
+    }
     holder.tvDesc.setText(post.getDescription());
     holder.tvUserName.setText(post.getUser().getUsername());
     Glide.with(context).load(post.getImage().getUrl()).into(holder.ivImage);
     holder.tvTime.setText(getRelativeTimeAgo(post.getTime()));
-    Glide.with(context).load(R.drawable.instagram_user_outline_24)
-            .apply(RequestOptions.circleCropTransform())
+    Glide.with(context).load(profilePicUrl)
             .apply(new RequestOptions().placeholder(R.drawable.instagram_user_outline_24))
+            .apply(RequestOptions.circleCropTransform())
             .into(holder.ivProfilePic);
   }
 
@@ -101,11 +105,6 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             Log.d("PostAdapter","rawJsonDate: " + rawJsonDate);
             e.printStackTrace();
         }
-        /*// relative date shortened to '7h' or '8m' or '9s'
-        String shortened = relativeDate.substring(0,relativeDate.indexOf(" ") + 2);
-        int i = shortened.indexOf(" ");
-        shortened = shortened.substring(0,i) + shortened.substring(i+1);
-        return shortened;*/
         return relativeDate;
     }
 

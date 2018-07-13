@@ -1,6 +1,9 @@
 package me.vivh.parstagram;
 
 import android.content.Context;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.widget.RecyclerView;
 import android.text.format.DateUtils;
 import android.util.Log;
@@ -65,7 +68,33 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
               view.setSelected(!view.isSelected());
           }
       });
+
+      ivProfilePic.setOnClickListener(new View.OnClickListener() {
+          @Override
+          public void onClick(View view) {
+              // replace existing fragment with profile fragment inside the frame
+              ProfileFragment profileFragment = new ProfileFragment();
+              FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+              FragmentTransaction ft = fm.beginTransaction();
+              ft.replace(R.id.fragmentPlace, profileFragment);
+              ft.commit();
+          }
+      });
+
+        tvUserName.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // replace existing fragment with profile fragment inside the frame
+                ProfileFragment profileFragment = new ProfileFragment();
+                FragmentManager fm = ((FragmentActivity) view.getContext()).getSupportFragmentManager();
+                FragmentTransaction ft = fm.beginTransaction();
+                ft.replace(R.id.fragmentPlace, profileFragment);
+                ft.commit();
+            }
+        });
+
     }
+
   }
 
   @Override

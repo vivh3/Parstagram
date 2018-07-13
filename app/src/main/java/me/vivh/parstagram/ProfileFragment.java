@@ -24,7 +24,7 @@ public class ProfileFragment extends Fragment {
     TextView tvUserName;
     ImageView ivProfilePic;
     Button editProfileBtn;
-
+    PostAdapter postAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -51,6 +51,7 @@ public class ProfileFragment extends Fragment {
                 .apply(RequestOptions.circleCropTransform())
                 .into(ivProfilePic);
 
+
         editProfileBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -74,6 +75,8 @@ public class ProfileFragment extends Fragment {
                 //finish();
             }
         });
+
+
         return rootView;
     }
 }

@@ -12,36 +12,30 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignParentTop="true"
+        android:layout_alignBottom="@+id/btnLogout"
         android:layout_centerHorizontal="true"
-        android:layout_marginStart="18dp"
-        android:layout_marginTop="25dp"
-        android:layout_toRightOf="@id/ivProfilePic"
         android:text="tvUserName"
         android:textAlignment="center"
         android:textSize="24sp" />
 
     <Button
         android:id="@+id/btnLogout"
-        android:layout_width="236dp"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_centerHorizontal="true"
-        android:layout_gravity="center"
-        android:layout_marginBottom="80dp"
-        android:background="@drawable/background_gradient"
-        android:text="Log Out"
-        android:textColor="@color/colorTextHint" />
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:background="@color/pink_0"
+        android:text="Log Out" />
 "
 
     <ImageView
         android:id="@+id/ivProfilePic"
-        android:layout_width="140dp"
-        android:layout_height="143dp"
+        android:layout_width="113dp"
+        android:layout_height="94dp"
         android:layout_alignParentTop="true"
         android:layout_gravity="left"
-        android:layout_marginTop="10dp"
         android:layout_marginLeft="10dp"
+        android:layout_marginTop="10dp"
         android:src="@drawable/instagram_user_outline_24" />
 
     <Button
@@ -55,5 +49,23 @@
         android:background="@color/white"
         android:text="Edit Profile"
         android:textAllCaps="false" />
+
+    <View
+        android:id="@+id/profile_divider"
+        android:layout_width="fill_parent"
+        android:layout_height="2dip"
+        android:layout_below="@+id/ivProfilePic"
+        android:layout_marginTop="15dp"
+        android:background="@drawable/background_gradient2" />
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/profile_recycler"
+        android:layout_width="match_parent"
+        android:layout_height="447dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp"
+        android:layout_alignTop="@+id/profile_divider" />
+
 
 </RelativeLayout>

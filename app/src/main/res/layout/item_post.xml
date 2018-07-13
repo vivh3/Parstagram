@@ -35,9 +35,12 @@
         android:layout_height="wrap_content"
         android:layout_toRightOf="@id/ivProfilePic"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="2dp"
+        android:layout_marginLeft="0dp"
         android:layout_marginTop="20dp"
-        android:text="Username" />
+        android:textSize="18sp"
+        android:text="Username"
+        android:onClick="onClick"
+        android:clickable="true"/>
 
     <TextView
         android:id="@+id/tvDescription"
@@ -62,20 +65,21 @@
         android:layout_width="68dp"
         android:layout_height="34dp"
         android:layout_above="@+id/ivImage"
-        android:layout_alignParentStart="true"
         android:layout_marginLeft="0dp"
-        android:layout_marginTop="5dp"
-        app:srcCompat="@drawable/instagram_user_outline_24" />
+        android:layout_marginTop="15dp"
+        app:srcCompat="@drawable/instagram_user_outline_24"
+        android:onClick="onClick"
+        android:clickable="true" />
 
     <ImageButton
         android:id="@+id/ibLike"
         style="?android:attr/borderlessButtonStyle"
-        android:layout_width="36dp"
+        android:layout_width="34dp"
         android:layout_height="29dp"
         android:layout_alignParentStart="true"
         android:layout_below="@+id/ivImage"
-        android:layout_marginLeft="5dp"
         android:layout_marginTop="7dp"
+        android:layout_marginLeft="5dp"
         android:background="@color/white"
         android:cropToPadding="true"
         app:srcCompat="@drawable/ufi_heart_icon" />

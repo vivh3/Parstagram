@@ -112,6 +112,7 @@ public class AddPostFragment extends Fragment {
 
     private void loadTopPosts() {
         final Post.Query postsQuery = new Post.Query();
+        postsQuery.orderByAscending("createdAt");
         postsQuery.getTop().withUser();
 
         postsQuery.findInBackground(new FindCallback<Post>() {

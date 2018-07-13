@@ -57,6 +57,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
       @BindView(R.id.tvTime) TextView tvTime;
       @BindView(R.id.ivProfilePic) ImageView ivProfilePic;
       @BindView(R.id.ibLike) ImageButton ibLike;
+      @BindView(R.id.tvLikeCount) TextView tvLikeCount;
 
     public ViewHolder(View itemView) {
       super(itemView);
@@ -66,6 +67,15 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
           @Override
           public void onClick(View view) {
               view.setSelected(!view.isSelected());
+              // TODO- implement liking a post
+              Integer numLikes = Integer.parseInt(tvLikeCount.getText().toString());
+              if (view.isSelected()) {
+                  tvLikeCount.setText(Integer.toString(numLikes+1));
+                  // TODO - add username to Parse array
+              } else {
+                  tvLikeCount.setText(Integer.toString(numLikes-1));
+                  // TODO - remove username from Parse array
+              }
           }
       });
 
@@ -112,6 +122,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
             .apply(new RequestOptions().placeholder(R.drawable.instagram_user_outline_24))
             .apply(RequestOptions.circleCropTransform())
             .into(holder.ivProfilePic);
+    holder.tvLikeCount.setText(post.getLikeCount());
   }
 
     // Clean all elements of the recycler

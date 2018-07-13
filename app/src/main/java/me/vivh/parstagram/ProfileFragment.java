@@ -108,6 +108,7 @@ public class ProfileFragment extends Fragment {
         ParseQuery<Post> query = ParseQuery.getQuery(Post.class);
         // Define our query conditions
         query.whereEqualTo("user", ParseUser.getCurrentUser());
+        query.orderByDescending("createdAt");
         // Execute the find asynchronously
         query.findInBackground(new FindCallback<Post>() {
             @Override

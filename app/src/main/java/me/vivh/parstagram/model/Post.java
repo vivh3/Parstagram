@@ -6,12 +6,15 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.List;
+
 @ParseClassName("Post")
 public class Post extends ParseObject {
     private static final String KEY_DESCRIPTION = "description";
     private static final String KEY_IMAGE = "image";
     private static final String KEY_USER = "user";
     private static final String KEY_TIME = "time";
+    private static final String KEY_LIKED_BY = "liked_by";
 
     public String getDescription() {
         return getString(KEY_DESCRIPTION);
@@ -43,6 +46,31 @@ public class Post extends ParseObject {
         put(KEY_TIME, time);
     }
 
+    public String getUsername() {
+        return getUser().getUsername();
+    }
+
+    public String getLikeCount() {
+        List<String> likes = getList(KEY_LIKED_BY);
+        return Integer.toString(likes.size());
+    }
+
+    public void likePost () {
+        //TODO - add username to liked_by array
+        List<String> likes = getList(KEY_LIKED_BY);
+        add(KEY_LIKED_BY, getUsername());
+        saveInBackground();
+    }
+
+    public void unlikePost () {
+        //TODO - remove username from liked_by array
+        List<String> likes = getList(KEY_LIKED_BY);
+        //remove(KEY_LIKED_BY, getUsername());
+    }
+
+
+
+
     public static class Query extends ParseQuery<Post> {
         public Query() {
             super(Post.class);
@@ -54,8 +82,9 @@ public class Post extends ParseObject {
         }
 
         public Query withUser() {
-            include("user");
+            include(KEY_USER);
             return this;
         }
+
     }
 }

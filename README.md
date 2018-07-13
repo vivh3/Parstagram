@@ -2,7 +2,7 @@
 
 **Parstagram** is a photo sharing app using Parse as its backend.
 
-Time spent: **X** hours spent in total
+Time spent: **25** hours spent in total
 
 ## User Stories
 
@@ -27,9 +27,9 @@ The following **optional** features are implemented:
 - User Profiles:
    - [x] Allow the logged in user to add a profile photo
    - [x] Display the profile photo with each post
-   - [ ] Tapping on a post's username or profile photo goes to that user's profile page
+   - [x] Tapping on a post's username or profile photo goes to that user's profile page
 - [ ] User can comment on a post and see all comments for each post in the post details screen.
-- [ ] User can like a post and see number of likes for each post in the post details screen.
+- [x] User can like a post and see number of likes for each post in the post details screen.
 - [ ] Create a custom Camera View on your phone.
 - [x] Run your app on your phone and use the camera to take the photo
 
@@ -40,8 +40,8 @@ The following **additional** features are implemented:
 
 Please list two areas of the assignment you'd like to **discuss further with your peers** during the next class (examples include better ways to implement something, how to extend your app in certain ways, etc):
 
-1.
-2.
+1. How to extend the app to implement direct messaging images
+2. How to implement followers
 
 ## Video Walkthrough
 
@@ -61,6 +61,8 @@ List an 3rd party libraries, icons, graphics, or other assets you used in your a
 ## Notes
 
 Describe any challenges encountered while building the app.
+- Adjusting the layout of the photos took a great deal of time, especially using the GridLayoutManager for the profile page
+- I didn't encounter this personally, but if I had completed the requirements before implementing fragments, I think I would have had difficulty transferring the contents of the activities to fragments.
 
 ## License
 

@@ -67,7 +67,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.ViewHolder> {
           @Override
           public void onClick(View view) {
               view.setSelected(!view.isSelected());
-              // TODO- implement liking a post
+              // TODO- implement full backend of liking a post
               Integer numLikes = Integer.parseInt(tvLikeCount.getText().toString());
               if (view.isSelected()) {
                   tvLikeCount.setText(Integer.toString(numLikes+1));

@@ -6,6 +6,7 @@ import com.parse.ParseObject;
 import com.parse.ParseQuery;
 import com.parse.ParseUser;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @ParseClassName("Post")
@@ -50,13 +51,19 @@ public class Post extends ParseObject {
         return getUser().getUsername();
     }
 
+
+    public void initializeLikedBy() {
+        if (getList(KEY_LIKED_BY) == null) {
+            put(KEY_LIKED_BY, new ArrayList<String>());
+        }
+    }
     public String getLikeCount() {
         List<String> likes = getList(KEY_LIKED_BY);
         return Integer.toString(likes.size());
+        //return "7";
     }
 
     public void likePost () {
-        //TODO - add username to liked_by array
         List<String> likes = getList(KEY_LIKED_BY);
         add(KEY_LIKED_BY, getUsername());
         saveInBackground();

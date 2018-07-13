@@ -228,6 +228,7 @@ public class AddPostFragment extends Fragment {
                     newPost.setImage(imageFile);
                     newPost.setUser(user);
                     newPost.setTime(time);
+                    newPost.initializeLikedBy();
                     newPost.saveInBackground();
 
                     // once background job is complete

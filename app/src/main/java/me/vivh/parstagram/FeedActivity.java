@@ -13,7 +13,7 @@ import android.view.MenuItem;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FeedActivity extends AppCompatActivity {
+public class FeedActivity extends AppCompatActivity implements ProfileFragment.OnFragmentInteractionListener {
 
     @BindView(R.id.navigationView) BottomNavigationView bottomNavView;
     @BindView(R.id.toolbar) Toolbar toolbar;

@@ -12,14 +12,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_alignBottom="@+id/btnLogout"
+        android:layout_alignBottom="@+id/btnLogOut"
         android:layout_centerHorizontal="true"
         android:text="tvUserName"
         android:textAlignment="center"
         android:textSize="24sp" />
 
     <Button
-        android:id="@+id/btnLogout"
+        android:id="@+id/btnLogOut"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -60,7 +60,7 @@
 
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/profile_recycler"
+        android:id="@+id/rvProfilePosts"
         android:layout_width="match_parent"
         android:layout_height="447dp"
         android:layout_alignParentStart="true"

@@ -60,7 +60,6 @@ public class Post extends ParseObject {
     public String getLikeCount() {
         List<String> likes = getList(KEY_LIKED_BY);
         return Integer.toString(likes.size());
-        //return "7";
     }
 
     public void likePost () {
@@ -73,9 +72,8 @@ public class Post extends ParseObject {
         //TODO - remove username from liked_by array
         List<String> likes = getList(KEY_LIKED_BY);
         //remove(KEY_LIKED_BY, getUsername());
+        saveInBackground();
     }
-
-
 
 
     public static class Query extends ParseQuery<Post> {
